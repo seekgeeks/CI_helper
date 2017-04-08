@@ -156,10 +156,22 @@ if(!function_exists(alert_message)){
 }
 
 if(!function_exists(send_formatted_mail)){
+/*
+*	Simple function for mailing using codeigniter
+*	Required parameter is an array which should have 4 values in it
+*	string name: by which name email should be sent
+*	string : email, by which email should be sent, (from)
+*	string : subject of the email
+*	message: it can be simple text, html or complete view of html
+*	it will return true when email function runs successfully, else false
+*	more details will be visible in error log 
+*
+*/
 	public function send_formatted_mail($data){
 		$this->load->library('email');
 		$this->email->clear();
 		
+		//	Checking any blank entry
 		if(empty($data['name'])
 			OR empty($data['subject'])
 			OR empty($data['to'])
@@ -169,7 +181,9 @@ if(!function_exists(send_formatted_mail)){
 		}
 		
 		
-			
+		/*
+			Initializing codeigniter email configuration
+		*/
 		$config['useragent']		=	'Codeigniter';
 		$config['mailpath']			=	'/usr/sbin/sendmail'; // or "/usr/sbin/sendmail"
 		$config['protocol']			=	'smtp';
@@ -206,7 +220,14 @@ if(!function_exists(send_formatted_mail)){
 }
 }
 
-	
+
+if(!function_exists(image_resize)):	
+/*
+*	Image resizing using this function
+*	@Param strong upload path : image path
+*	with and height optional any one parameter to be passed
+*
+*/
 	public function image_resize($upload_path,$width=NULL,$height=NULL){
 			// Just need path to grab image and resize followed by overwriting
 			$this->load->library('image_lib');
@@ -215,17 +236,9 @@ if(!function_exists(send_formatted_mail)){
 			$config['source_image']		=	$upload_path;
 			$config['new_image']			=	$upload_path;
 			
-			if($width){
-			$config['width']=$width;
-			}else{
-			$config['width']=$this->settings_model->get_settings('upload_img_width');
+			if($width==NULL && $height==NULL){
+				return false;
 			}
-			
-			if($height){
-				$config['height']=$this->settings_model->get_settings('upload_img_height');
-				// height is set, is applied, else default size will be taken
-			}
-			
 			
 			$this->image_lib->initialize($config); 
 				$confirm=$this->image_lib->resize();
@@ -241,7 +254,7 @@ if(!function_exists(send_formatted_mail)){
 				http://stackoverflow.com/questions/11193346/image-resizing-codeigniter
 				*/
 	}
-			
+endif;			
 			
 	public function update_sitedata($var,$val){
 			log_message('error', 'Variable loaded'.$var);
