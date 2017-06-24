@@ -17,7 +17,7 @@ define('DB_NAME','');
 
 
 //	Basic Config
-defile('BASE_URL','http://localhost/cip/ci_helper/');
+defile('BASE_URL','http://localhost/github/ci_helper/');
 
 /**
  * CodeIgniter v3.x
