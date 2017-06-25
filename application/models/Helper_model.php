@@ -367,15 +367,6 @@ endif;
 			}
 	}
 	
-	public function get_allby_id($table,$key,$value){
-		$query = $this->db->get_where($table, array($key => $value));
-		if($query->num_rows()>0){
-				return $query->result();
-		}else{
-				return FALSE;
-		}
-					
-	}
 	
 	public function get_row_array($table,$where,$order=NULL,$limit=1){
 		
@@ -484,36 +475,14 @@ endif;
 			$this->db->or_like($values,$query);
 		}
 		if($condition!=NULL){
-			
+			/*
+			Suggest something here
+			*/
 		}
 		$query	=	$this->db->get();
 		if($query){
 			return $query->result();
 		}
-	}
-	
-	public function change_password($table,$data){
-				/*
-				Please do not use this function, under testing it is	
-				*/
-				
-				// Valid for current user password only
-				
-				
-				
-				$id=$this->session->userdata('uid');
-				$newdata = array(
-					'password' => sha1($pdata['newpass'])
-				);
-				$query	=	$this->db->where('id', $id);
-				$query	=	$this->db->update($table, $newdata);
-				
-				if($query){
-						return TRUE;
-				}else{
-					log_message('error','Database query failed while updating password '.mysql_error());
-					return FALSE;
-				}
 	}
 	
 	
