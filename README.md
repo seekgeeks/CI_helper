@@ -54,7 +54,6 @@
  Just do 
  ```
  $ git clone https://github.com/Thedijje/CI_helper.git
- 
  ```
 
  ### Configuring
