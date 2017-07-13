@@ -1,6 +1,6 @@
 <?php
 class Helper_model extends CI_Model {
-if(!function_exists(get_settings)){
+
 /*
 *	info:	This Method is meant to fetch global configuration data from database
 *	to use this method
@@ -25,9 +25,9 @@ if(!function_exists(get_settings)){
 		}
 	
 	}
-}
+
 	
-if(!function_exists(upload_file)){
+
 /*
 *	Uploading file was not this simple enough.
 *	All you need is name of input type file which is $_FILES's name
@@ -87,9 +87,9 @@ if(!function_exists(upload_file)){
 			}
 		
 	}
-}
 
-if(!function_exists(display_alert)){
+
+
 /*
 *	This function can be used anywhere to display alert message in well formatted manner
 *	Any warning or success or info message will be displayed
@@ -111,9 +111,9 @@ if(!function_exists(display_alert)){
 		</div>
 		<?php
 	}
-}
 
-if(!function_exists(redirect_msg)){
+
+
 /*
 *	This method can be used to redirect current page to next page and displayed message
 *	Example, if login fails, Next page can be shown incorrect username password.
@@ -133,9 +133,9 @@ if(!function_exists(redirect_msg)){
 	redirect(base_url($url));
 	exit();
 	}
-}
 
-if(!function_exists(alert_message)){
+
+
 /*
 *	Works with Bootstap classes
 *	This function needs to call on views where certain alert messages needs to be displayed.
@@ -153,9 +153,9 @@ if(!function_exists(alert_message)){
 			<?php
 		}
 	}
-}
 
-if(!function_exists(send_formatted_mail)){
+
+
 /*
 *	Simple function for mailing using codeigniter
 *	Required parameter is an array which should have 4 values in it
@@ -218,10 +218,10 @@ if(!function_exists(send_formatted_mail)){
 		}
 
 }
-}
 
 
-if(!function_exists(image_resize)):	
+
+
 /*
 *	Image resizing using this function
 *	@Param strong upload path : image path
@@ -254,7 +254,7 @@ if(!function_exists(image_resize)):
 				http://stackoverflow.com/questions/11193346/image-resizing-codeigniter
 				*/
 	}
-endif;			
+	
 			
 	public function update_sitedata($var,$val){
 			log_message('error', 'Variable loaded'.$var);
