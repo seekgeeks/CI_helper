@@ -57,7 +57,12 @@
  ```
 
  ### Configuring
- You really don't have to digg inside to configure anything, most of settings are pre-configured. You can configure _database_ and _base url_ values right in index.php file, Yeah.. I know its Awesome
+ You really don't have to digg inside to configure anything, most of settings are pre-configured. You can configure _database_ and _base url_ values right in index.php file, Yeah.. I know its Awesome.
+Although, to make your life easier, just add this little piece of code in your `autoload.php`
+`$autoload['model'] = array( array( 'Helper_model'=>'lib' ) );`
+Or you can also hit this line of code in your constructor of any Controller
+`$this->load->model('Helper_model','lib');`
+All the following examples are using this reference only. Yea.. it is Awesome.
 
 
 ### Functions list
