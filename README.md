@@ -66,26 +66,26 @@ Following are the functions inside **helper_model** of this package
 #### General functions 
 
 #### get_settings
-**Call**
+**Call**  
 `$this->lib->get_settings($key_name)`
 
 **Arguments**
 `(string) $keyname` required which will fetch values from table.
 
-**Requirement**
+**Requirement**  
 Database connection : Yes  
 Database table name : `config`  
 Database structure : `id(INT)`,`type(VARCHAR)`,`name(VARCHAR)`,`value(VARCHAR)`  
 #### upload_file
 
-**Call**
+**Call**  
 `$this->lib->upload_file($path,$name);`  
 
-**Arguments**
+**Arguments**  
 `(string) $path` : Path where files to be saved/moved example : *static/files/uploaded/*  
 `(string) $name` : Name of the $_FILE variable from where file to be picked.  
 
-**Usage**
+**Usage**  
 ```
 $this->lib->upload_file('static/upload','logo_image');
 ```
@@ -100,33 +100,33 @@ $this->lib->upload_file('static/upload','logo_image');
 `(string) $type` : Bootstrap 3+ Alert class. Options : `danger`,`success`,`info`,`warning`  
 `(string) $icon`: FontAwesome icon class. Default `fa-info-circle  `
 
-**Usage**
+**Usage**  
 ```
-$this->lib->display_alert('Something went wrong','danger','times-circle);
+$this->lib->display_alert('Something went wrong','danger','times-circle');
 ```
 
 #### redirect_msg
-**Call**
+**Call**  
 `$this->lib->redirect_msg($msg,$type,$url);`  
 
-**Arguments**
+**Arguments**  
 `(string) $msg` : Message to display on page  
 `(string) $type`: Bootstrap contenxt of message. Options : `success`,`danger`,`warning`,`info`  
 `(string) $url` : Local project's URL, URL must not be external, and must contain only inner `controller/methods`. Internally   `base_url($url)` is being called, so `url` Helper is required to run this function.  
 
-**Usage**
+**Usage**  
 ```
 $this->lib->redirect_msg('Incorrect username or password','danger','user/login');
 ```
 
 #### alert_message
-**Call**
+**Call**  
 `$this->lib->alert_message();`  
 
-**Arguments**
+**Arguments**  
 No argument needed  
 
-**Usage**
+**Usage**  
 Paste the following code anywhere in `view` where result of `redirect_msg` function has to be displayed  
 
 ```
@@ -137,7 +137,7 @@ $this->lib->alert_message();
 **Call**  
 `$this->lib->send_formatted_mail($email_data);`  
 
-**Arguments**
+**Arguments**  
 `(array) $mail_data`: Consist of following values  
 
 - `(string) from` : Valid email address to send email from  
@@ -145,7 +145,7 @@ $this->lib->alert_message();
 - `(string) subject` : Valid string for email subject  
 - `(string) message` : Text/HTML content to be send in email   
 
-**Usage**
+**Usage**  
 ```
 $data['from']	=	'no-reply@example.com';
 $data['to']	=	'awesomeuser@example.com';
@@ -157,17 +157,17 @@ $this->lib->send_formatted_mail($data);
 
 
 #### image_resize
-**Call**
+**Call**  
 `$this->lib->image_resize($path,500,600)`
 
-**Arguments**
+**Arguments**  
 `(string) $path`	:	Valid path where image exists
 `(int) $width`	:	width of new image in pixel
 `(int) $height`	:	Height of new image in pixel
 
 *If one of height/width is provided, other will be adjusted keeping ratio same*
 
-**Usage**
+**Usage**  
 ```
 $this->lib->image_resize('static/upload/profile_image/user.jpg',250,250);
 ```
