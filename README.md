@@ -42,7 +42,7 @@
  Now all i have to do is for any table any query, i never had to write this code again and again. just use that as follows
 
  ```
- $users_list	=	$this->helper_mode->get_multiple('users',array('status'=>1),10);
+ $users_list	=	$this->helper_model->get_multiple('users',array('status'=>1),10);
 
  ```
 
