@@ -74,7 +74,7 @@ Following are the functions inside **helper_model** of this package
 |	5	|	alert_message	|	$this->lib->alert_message()	|	Put this code on html code where output of redirect_msg function is to display_alert|
 |	6	|	send_formatted_mail	|	$this->lib->send_formatted_mail($data)	|	View detail of this function for usecase	|
 |	7	|	image_resize	|	$this->lib->image_resize($path,$width,$height)	|	Resize any valid image file using this simple Function 	|
-|	8	|	update_sitedata	|	$this->lib->update_sitedata($var,$val)	|	Update table used in get_setting to update data in it 	|
+
 
 
 #### Database functions

@@ -228,113 +228,125 @@ class Helper_model extends CI_Model {
 *	with and height optional any one parameter to be passed
 *
 */
-	public function image_resize($upload_path,$width=NULL,$height=NULL){
+	public function image_resize($upload_path='',$width=NULL,$height=NULL){
 			// Just need path to grab image and resize followed by overwriting
-			$this->load->library('image_lib');
-			ini_set('memory_limit', '-1');	// this will prevent memory overload by PHP, 
-			
-			$config['source_image']		=	$upload_path;
-			$config['new_image']			=	$upload_path;
-			
+			if($upload_path==''	OR 	!file_exists($upload_path)){
+				log_message('error','Helper_model : Empty file path or image does not exists for image resizing');
+				return false;
+			}
+
 			if($width==NULL && $height==NULL){
 				return false;
 			}
+
+			$this->load->library('image_lib');
+			
+			ini_set('memory_limit', '-1');	// this will prevent memory overload by PHP, 
+			
+			$config['source_image']		=	$upload_path;
+			$config['new_image']		=	$upload_path;
 			
 			$this->image_lib->initialize($config); 
-				$confirm=$this->image_lib->resize();
-				if($confirm){
-					return TRUE;
-				}else{
-					return FALSE;
-				}
+
+			$confirm=$this->image_lib->resize();
+			
+			if($confirm){
+			
+				return TRUE;
+			
+			}else{
+			
+				return FALSE;
+			
+			}
 				
 				
-				/*
-				Reference
-				http://stackoverflow.com/questions/11193346/image-resizing-codeigniter
-				*/
+			/*
+			Reference
+			http://stackoverflow.com/questions/11193346/image-resizing-codeigniter
+			*/
 	}
 	
-			
-	public function update_sitedata($var,$val){
-			log_message('error', 'Variable loaded'.$var);
-			log_message('error', 'value loaded'.$val);
-				$data = array(
-						'value' => $val
-				);
-		
-				$query=$this->db->where('var', $var);
-				$query=$this->db->update('config', $data);
-				
-				if($query){
-				log_message('error', 'query success');
-					return TRUE;
-					}else{
-					log_message('error', 'query failed');
-					return FALSE;
-					}
-		   }
 	
 	
 	
 	
-	public function del($table,$col,$val){
+	public function del($table=NULL,$col=NULL,$val=NULL){
 	/*
 	These are database CRUD helper,
 	in case of error, please refer error log or use native codeigniter function
 	*/
 	
 		if(($table==NULL) OR ($col==NULL) OR ($val==NULL)){
-			log_message('error','Missing table, col, or value');
+			log_message('error','Helper_model : Missing table, col, or value');
 			return FALSE;
 		}
 		
 		$query		=	$this->db->where($col, $val);
 		$query		=	$this->db->delete($table);
-		if($query){
-			return TRUE;
-		}else{
-			log_message('error','Unable to delete from '.$table." given attribute ".$col." with value ".$val);
+
+		if(!$query){
+			log_message('error','Helper_model! Unable to delete from '.$table." given attribute ".$col." with value ".$val);
 			return FALSE;
-			
 		}
+
+		return TRUE;
 	}
 	
-	public function update($table,$data,$col,$val){
+	public function update($table=NULL,$data=NULL,$col=NULL,$val=NULL){
+
 		if(($data==NULL) OR ($col==NULL) OR ($val==NULL) OR ($table==NULL)){
-			log_message('error','Missing table, col, or value');
+			log_message('error','Helper_model! Update > Missing table, col, or value');
 			return FALSE;
 			exit();
 		}
 		
 		$query	=	$this->db->where($col, $val);
 		$query	=	$this->db->update($table, $data);
-		if($query){
-				return TRUE;
-			}else{
-				return FALSE;
-			}
+		if(!$query){
+			return FALSE;
+		}
+
+		return TRUE;
 	}
 	
-	public function get_by_id($table,$col,$value,$limit=null,$order=NULL){
-			
+	public function get_by_id($table=NULL,$col=NULL,$value=NULL,$limit=null,$order=NULL){
+
+		if($table==NULL OR $col==NULL OR $value==NULL){
+
+			log_message('error','Helper_model! get_by_id > Missing table, col, or value');
+			return FALSE;
+
+		}
+
 		if(!empty($order)){
 			
 			foreach ($order as $key => $value){
-			$query=$this->db->order_by($key, $value);	
+
+				$query=$this->db->order_by($key, $value);	
+			
 			}
-		}	
+
+		}
+
 		$query =	$this->db->get_where($table, array($col => $value),$limit);
 		
 		if($query->num_rows()>0){
-				return $query->result();
-			}else{
-				return FALSE;
-			}
+				
+			return $query->result();
+			
+		}else{
+			
+			return FALSE;
+			
+		}
 	}
 	
-	public function get_multi_where($table,$where,$limit=null,$count=FALSE,$order=NULL,$group=NULL){
+	public function get_multi_where($table=NULL,$where=NULL,$limit=null,$count=FALSE,$order=NULL,$group=NULL){
 		
+		if($table==NULL OR	$where==NULL){
+			log_message('error','Helper_model! > get_multi_where : Missing table or where argument')
+		}
 		if(!empty($group)){
 			$this->db->group_by($group);
 		}
@@ -352,13 +364,19 @@ class Helper_model extends CI_Model {
 		
 		
 		
-		$query =	$this->db->get_where($table, $where,$limit);
+		$query =	$this->db->get_where($table	, $where	,	$limit);
 		
 		if($query->num_rows()>0){
+				//	If just count is needed
 				if($count){
+
+					
 					return $query->num_rows();
+				
 				}else{
+				//	Or return full result
 					return $query->result();
+				
 				}
 				
 			}else{
@@ -371,13 +389,20 @@ class Helper_model extends CI_Model {
 	public function get_row_array($table,$where,$order=NULL,$limit=1){
 		
 			$query =	$this->db->get_where($table, $where,$limit);
+
 			if($query->num_rows()>0){
+			
 				$row = $query->row();
+			
 				if(isset($row)){
-				return $row;	
+			
+					return $row;	
+			
 				}
 			}else{
+			
 				return FALSE;
+			
 			}
 			
 	}
