@@ -65,19 +65,118 @@ Following are the functions inside **helper_model** of this package
 
 #### General functions 
 
-| Sr | Function Name | Use syntax | Comment  |
-|----|---------------|------------|----------|
-|	1	|	get_settings	|	$this->lib->get_settings('sitename')	|	Please refer detail of this function below	|
-|	2	|	upload_file		|	$this->lib->upload_file($path,$name)		|	path is directory where file to be save, $name is input field name of file, use for single file upload only	|
-|	3	|	display_alert	|	$this->lib->display_alert($msg,$type,$icon)	|	Show formatted display message in bootstrap alert style 	|
-|	4	|	redirect_msg	|	$this->lib->redirect_msg($msg,$type,$url)	|	Show message on next page after redirect, e.g. Record deleted successfully	|
-|	5	|	alert_message	|	$this->lib->alert_message()	|	Put this code on html code where output of redirect_msg function is to display_alert|
-|	6	|	send_formatted_mail	|	$this->lib->send_formatted_mail($data)	|	View detail of this function for usecase	|
-|	7	|	image_resize	|	$this->lib->image_resize($path,$width,$height)	|	Resize any valid image file using this simple Function 	|
+#### get_settings
+**Call**
+`$this->lib->get_settings($key_name)`
+
+**Arguments**
+`(string) $keyname` required which will fetch values from table.
+
+**Requirement**
+Database connection : Yes
+Database table name : `config`
+Database structure : `id(INT)`,`type(VARCHAR)`,`name(VARCHAR)`,`value(VARCHAR)`
+
+#### upload_file
+**Call**
+`$this->lib->upload_file($path,$name);`
+
+**Arguments**
+`(string) $path` : Path where files to be saved/moved example : *static/files/uploaded/*
+`(string) $name` : Name of the $_FILE variable from where file to be picked.
+
+**Usage**
+```
+$this->lib->upload_file('static/upload','logo_image');
+```
+
+
+#### display_alert
+**Call**
+`$this->lib->display_alert($msg,$type='info',$icon='fa-info-circle');`
+
+**Arguments**
+`(string) $msg`: Message to be displayed. 
+`(string) $type` : Bootstrap 3+ Alert class. Options : `danger`,`success`,`info`,`warning`
+`(string) $icon`: FontAwesome icon class. Default `fa-info-circle`
+
+**Usage**
+```
+$this->lib->display_alert('Something went wrong','danger','times-circle);
+```
+
+#### redirect_msg
+**Call**
+`$this->lib->redirect_msg($msg,$type,$url)`
+
+**Arguments**
+`(string) $msg` : Message to display on page
+`(string) $type`: Bootstrap contenxt of message. Options : `success`,`danger`,`warning`,`info`
+`(string) $url` : Local project's URL, URL must not be external, and must contain only inner `controller/methods`. Internally `base_url($url)` is being called, so `url` Helper is required to run this function.
+
+**Usage**
+```
+$this->lib->redirect_msg('Incorrect username or password','danger','user/login');
+```
+
+#### alert_message
+**Call**
+`$this->lib->alert_message();`
+
+**Arguments**
+No argument needed
+
+**Usage**
+Paste the following code anywhere in `view` where result of `redirect_msg` function has to be displayed
+
+```
+$this->lib->alert_message();
+```
+
+#### send_formatted_mail
+**Call**
+`$this->lib->send_formatted_mail($email_data);`
+
+**Arguments**
+`(array) $mail_data`: Consist of following values
+
+- `(string) from` : Valid email address to send email from 
+- `(string) to` : Valid email address to send mail to
+- `(string) subject` : Valid string for email subject
+- `(string) message` : Text/HTML content to be send in email 
+
+**Usage**
+```
+$data['from']	=	'no-reply@example.com';
+$data['to']	=	'awesomeuser@example.com';
+$data['subject']=	'Welcome to CI HELPER Model';
+$data['message']=	$this->load->view('email/hello_teplate',$content,TRUE);
+
+$this->lib->send_formatted_mail($data);
+```
+
+
+#### image_resize
+**Call**
+`$this->lib->image_resize($path,500,600)`
+
+**Arguments**
+`(string) $path`	:	Valid path where image exists
+`(int) $width`	:	width of new image in pixel
+`(int) $height`	:	Height of new image in pixel
+
+*If one of height/width is provided, other will be adjusted keeping ratio same*
+
+**Usage**
+```
+$this->lib->image_resize('static/upload/profile_image/user.jpg',250,250);
+```
 
 
 
-#### Database functions
+
+
+### Database functions
 
 |	Sr	|	Function Name	|	Use syntax	|	Comment	|
 |----|---------------|------------|----------|
