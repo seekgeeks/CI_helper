@@ -73,17 +73,17 @@ Following are the functions inside **helper_model** of this package
 `(string) $keyname` required which will fetch values from table.
 
 **Requirement**
-Database connection : Yes
-Database table name : `config`
-Database structure : `id(INT)`,`type(VARCHAR)`,`name(VARCHAR)`,`value(VARCHAR)`
-
+Database connection : Yes  
+Database table name : `config`  
+Database structure : `id(INT)`,`type(VARCHAR)`,`name(VARCHAR)`,`value(VARCHAR)`  
 #### upload_file
+
 **Call**
-`$this->lib->upload_file($path,$name);`
+`$this->lib->upload_file($path,$name);`  
 
 **Arguments**
-`(string) $path` : Path where files to be saved/moved example : *static/files/uploaded/*
-`(string) $name` : Name of the $_FILE variable from where file to be picked.
+`(string) $path` : Path where files to be saved/moved example : *static/files/uploaded/*  
+`(string) $name` : Name of the $_FILE variable from where file to be picked.  
 
 **Usage**
 ```
@@ -93,12 +93,12 @@ $this->lib->upload_file('static/upload','logo_image');
 
 #### display_alert
 **Call**
-`$this->lib->display_alert($msg,$type='info',$icon='fa-info-circle');`
+`$this->lib->display_alert($msg,$type='info',$icon='fa-info-circle');`  
 
 **Arguments**
-`(string) $msg`: Message to be displayed. 
-`(string) $type` : Bootstrap 3+ Alert class. Options : `danger`,`success`,`info`,`warning`
-`(string) $icon`: FontAwesome icon class. Default `fa-info-circle`
+`(string) $msg`: Message to be displayed.  
+`(string) $type` : Bootstrap 3+ Alert class. Options : `danger`,`success`,`info`,`warning`  
+`(string) $icon`: FontAwesome icon class. Default `fa-info-circle  `
 
 **Usage**
 ```
@@ -107,12 +107,12 @@ $this->lib->display_alert('Something went wrong','danger','times-circle);
 
 #### redirect_msg
 **Call**
-`$this->lib->redirect_msg($msg,$type,$url)`
+`$this->lib->redirect_msg($msg,$type,$url);`  
 
 **Arguments**
-`(string) $msg` : Message to display on page
-`(string) $type`: Bootstrap contenxt of message. Options : `success`,`danger`,`warning`,`info`
-`(string) $url` : Local project's URL, URL must not be external, and must contain only inner `controller/methods`. Internally `base_url($url)` is being called, so `url` Helper is required to run this function.
+`(string) $msg` : Message to display on page  
+`(string) $type`: Bootstrap contenxt of message. Options : `success`,`danger`,`warning`,`info`  
+`(string) $url` : Local project's URL, URL must not be external, and must contain only inner `controller/methods`. Internally   `base_url($url)` is being called, so `url` Helper is required to run this function.  
 
 **Usage**
 ```
@@ -121,29 +121,29 @@ $this->lib->redirect_msg('Incorrect username or password','danger','user/login')
 
 #### alert_message
 **Call**
-`$this->lib->alert_message();`
+`$this->lib->alert_message();`  
 
 **Arguments**
-No argument needed
+No argument needed  
 
 **Usage**
-Paste the following code anywhere in `view` where result of `redirect_msg` function has to be displayed
+Paste the following code anywhere in `view` where result of `redirect_msg` function has to be displayed  
 
 ```
 $this->lib->alert_message();
 ```
 
 #### send_formatted_mail
-**Call**
-`$this->lib->send_formatted_mail($email_data);`
+**Call**  
+`$this->lib->send_formatted_mail($email_data);`  
 
 **Arguments**
-`(array) $mail_data`: Consist of following values
+`(array) $mail_data`: Consist of following values  
 
-- `(string) from` : Valid email address to send email from 
-- `(string) to` : Valid email address to send mail to
-- `(string) subject` : Valid string for email subject
-- `(string) message` : Text/HTML content to be send in email 
+- `(string) from` : Valid email address to send email from  
+- `(string) to` : Valid email address to send mail to  
+- `(string) subject` : Valid string for email subject  
+- `(string) message` : Text/HTML content to be send in email   
 
 **Usage**
 ```
