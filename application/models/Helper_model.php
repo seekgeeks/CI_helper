@@ -363,7 +363,7 @@ class Helper_model extends CI_Model {
 	public function get_multi_where($table=NULL,$where=NULL,$limit=null,$count=FALSE,$order=NULL,$group=NULL){
 		
 		if($table==NULL OR	$where==NULL){
-			log_message('error','Helper_model! > get_multi_where : Missing table or where argument')
+			log_message('error','Helper_model! > get_multi_where : Missing table or where argument');
 		}
 		if(!empty($group)){
 			$this->db->group_by($group);
